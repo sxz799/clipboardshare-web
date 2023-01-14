@@ -7,9 +7,18 @@ module.exports = defineConfig({
     proxy: {
       '/clipboard': {
         ws: false,
-        target: "http://127.0.0.1:3000",
+        target: "http://d.sxz799.fun:3000",
         changeOrigin: true
       }
     }
   },
+  pwa: {
+    iconPaths: {
+      favicon32: 'favicon.ico',
+      favicon16: 'favicon.ico',
+      appleTouchIcon: 'appleIcon.png',
+      maskIcon: 'favicon.ico',
+      msTileImage: 'favicon.ico'
+    }
+  }
 })

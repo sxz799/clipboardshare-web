@@ -1,32 +1,49 @@
 <template>
 
-  <el-card class="box-card" >
-    <template #header>
-      <div class="card-header">
-        <span>实时共享剪切板</span>
-        <div>
-          <el-button type="success" @click="copy" round>复制</el-button>
-          <el-button type="danger" @click="reset" round>清空</el-button>
-          <el-button type="info" @click="showLogs" round>历史记录</el-button>
-        </div>
-
+  <el-row>
+    <el-col :span="2"></el-col>
+    <el-col :span="20">
+      <el-card class="box-card" >
+        <template #header>
+          <div class="card-header">
+            <span>实时共享剪切板</span>
+            <div>
+              <el-button type="success" @click="copy" round>复制</el-button>
+              <el-button type="danger" @click="reset" round>清空</el-button>
+            </div>
+          </div>
+        </template>
+        <el-input
+            v-model="content"
+            :autosize="{ minRows: 15, maxRows: 50 }"
+            type="textarea"
+            placeholder="Please input"
+        />
+      </el-card>
+    </el-col>
+    <el-col :span="2"></el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="2">
+      <br>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="2"></el-col>
+    <el-col :span="20">
+      <div class="demo-image">
+        <el-image @click="showLogs" :src="logoPng"/>
       </div>
-    </template>
-    <el-input
-        v-model="content"
-        :autosize="{ minRows: 25, maxRows: 50 }"
-        type="textarea"
-        placeholder="Please input"
-    />
-  </el-card>
+    </el-col>
+    <el-col :span="2"></el-col>
+  </el-row>
 
   <el-dialog v-model="showLog" title="历史记录" width="70%">
 
     <el-table :data="logData" style="width: 100%" >
-      <el-table-column fixed="left" prop="id" label="ID" style="width: 5%" />
-      <el-table-column prop="msg" label="内容" style="width: 80%" />
-      <el-table-column prop="date" label="日期" style="width: 10%" />
-      <el-table-column fixed="right" label="操作" style="width: 5%">
+      <el-table-column prop="date" label="日期"  />
+      <el-table-column prop="msg" label="内容" />
+      <el-table-column fixed="right" label="操作" >
         <template #default="scope">
           <el-button type="primary" size="small" @click.prevent="handleCopy(scope.row)">
             复制
@@ -43,7 +60,7 @@
 import api from "../api";
 import {ElMessage} from 'element-plus';
 import useClipboard from 'vue-clipboard3';
-
+import logoPng  from '@/assets/logo.png'
 
 const {toClipboard} = useClipboard();
 export default {
@@ -51,6 +68,7 @@ export default {
   computed: {},
   data() {
     return {
+      logoPng:logoPng,
       content: '',
       lastContent: '',
       showLog: false,

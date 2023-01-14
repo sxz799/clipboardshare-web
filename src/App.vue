@@ -4,7 +4,7 @@
 
 <script>
 import Clipboard from './components/Clipboard.vue';
-import { ref } from 'vue'
+
 export default {
   name: 'App',
   components: {
