@@ -3,7 +3,7 @@
   <el-row>
     <el-col :span="1"></el-col>
     <el-col :span="22">
-      <el-card class="box-card" >
+      <el-card class="box-card">
         <template #header>
           <div class="card-header">
             <span style="color: mediumpurple">共享剪切板</span>
@@ -39,13 +39,11 @@
     </el-col>
     <el-col :span="2"></el-col>
   </el-row>
-
   <el-dialog v-model="showLog" title="历史记录" width="70%">
-
-    <el-table :data="logData" style="width: 100%" >
-      <el-table-column prop="date" label="日期"  />
-      <el-table-column prop="msg" label="内容" />
-      <el-table-column fixed="right" label="操作" >
+    <el-table :data="logData" style="width: 100%">
+      <el-table-column prop="date" label="日期"/>
+      <el-table-column prop="msg" label="内容"/>
+      <el-table-column fixed="right" label="操作">
         <template #default="scope">
           <el-button type="primary" size="small" @click.prevent="handleCopy(scope.row)">
             复制
@@ -62,7 +60,7 @@
 import api from "../api";
 import {ElMessage} from 'element-plus';
 import useClipboard from 'vue-clipboard3';
-import logoPng  from '@/assets/logo.png'
+import logoPng from '@/assets/logo.png'
 
 const {toClipboard} = useClipboard();
 export default {
@@ -70,7 +68,7 @@ export default {
   computed: {},
   data() {
     return {
-      logoPng:logoPng,
+      logoPng: logoPng,
       content: '',
       lastContent: '',
       showLog: false,
@@ -78,7 +76,7 @@ export default {
       timer: null
     };
   },
-  mounted() {
+  mounted: function () {
     api.getClipboard().then(res => {
       if (res.data.success) {
         this.content = res.data.clipboard.content;
@@ -86,8 +84,8 @@ export default {
       } else {
         ElMessage.error(res.data.message);
       }
-    }),
-        this.timer = setInterval(this.flashData, 3000);
+    });
+    this.timer = setInterval(this.flashData, 3000);
   },
 
   beforeDestroy() {
@@ -129,7 +127,8 @@ export default {
       this.content = '';
     },
     showLogs() {
-      this.showLog = true, api.getLogs().then(res => {
+      this.showLog = true
+      api.getLogs().then(res => {
         this.logData = res.data;
         console.log(this.logData)
       });
