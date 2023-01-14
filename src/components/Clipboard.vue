@@ -1,12 +1,12 @@
 <template>
 
   <el-row>
-    <el-col :span="2"></el-col>
-    <el-col :span="20">
+    <el-col :span="1"></el-col>
+    <el-col :span="22">
       <el-card class="box-card" >
         <template #header>
           <div class="card-header">
-            <span>实时共享剪切板</span>
+            <span style="color: mediumpurple">共享剪切板</span>
             <div>
               <el-button type="success" @click="copy" round>复制</el-button>
               <el-button type="danger" @click="reset" round>清空</el-button>
@@ -21,7 +21,7 @@
         />
       </el-card>
     </el-col>
-    <el-col :span="2"></el-col>
+    <el-col :span="1"></el-col>
   </el-row>
   <el-row>
     <el-col :span="2">
@@ -34,6 +34,8 @@
       <div class="demo-image">
         <el-image @click="showLogs" :src="logoPng"/>
       </div>
+      <p style="color: coral">每3秒获取一次最新数据</p>
+      <p style="color: coral">内容改变后,3秒内同步到服务器</p>
     </el-col>
     <el-col :span="2"></el-col>
   </el-row>
